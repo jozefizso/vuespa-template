@@ -1,0 +1,39 @@
+name: build
+
+on:
+  workflow_dispatch:
+  pull_request:
+  push:
+    branches:
+      - main
+
+env:
+  DOTNET_NOLOGO: 1
+  DOTNET_CLI_TELEMETRY_OPTOUT: 1
+  DOTNET_GENERATE_ASPNET_CERTIFICATE: 0
+  VERSION_SUFFIX: 'ci.${{ github.run_number }}'
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+
+    steps:
+    - name: checkout
+      uses: actions/checkout@v3
+
+    - name: setup dotnet
+      uses: actions/setup-dotnet@v2
+      with:
+        dotnet-version: '6.0.x'
+
+    - name: build template
+      run: dotnet build ./src --configuration Release --version-suffix "$VERSION_SUFFIX"
+
+    - name: pack template
+      run: dotnet pack ./src --no-build --configuration Release --output dist --version-suffix "$VERSION_SUFFIX"
+
+    - name: publish
+      if: github.event_name != 'pull_request'
+      uses: actions/upload-artifact@v3
+      with:
+        path: dist/*.nupkg

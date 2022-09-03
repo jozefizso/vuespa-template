@@ -3,6 +3,7 @@
   <PropertyGroup>
     <PackageType>Template</PackageType>
     <PackageVersion>6.3</PackageVersion>
+    <PackageVersion Condition=" '$(VersionSuffix)' != '' ">$(PackageVersion)-$(VersionSuffix)</PackageVersion>
 
     <PackageId>AspnetVue.ProjectTemplates</PackageId>
     <Title>ASP.NET Core with Vue App template</Title>
