@@ -23,6 +23,8 @@
 
   <ItemGroup>
     <Content Include="templates/**/*" Exclude="templates/**/bin/**;templates/**/obj/**;templates/**/node_modules/**" />
+    <Content Remove="templates/.gitignore" />
+    <Content Remove="templates/**/package-lock.json" />
     <Compile Remove="**/*" />
   </ItemGroup>
 
