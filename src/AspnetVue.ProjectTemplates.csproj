@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <PackageType>Template</PackageType>
+    <PackageVersion>6.3</PackageVersion>
+
+    <PackageId>AspnetVue.ProjectTemplates</PackageId>
+    <Title>ASP.NET Core with Vue App template</Title>
+    <Authors>jozefizso</Authors>
+    <Description>Template for creating ASP.NET Core web app with Vue frontend.</Description>
+    <PackageTags>dotnet-new;templates;spa;vue;vue3</PackageTags>
+
+    <TargetFramework>net6.0</TargetFramework>
+
+    <IncludeContentInPack>true</IncludeContentInPack>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+    <ContentTargetFolders>content</ContentTargetFolders>
+    <NoWarn>$(NoWarn);NU5128</NoWarn>
+    <!-- By default Pack will exclude files that start with '.', we want to include those files -->
+    <NoDefaultExcludes>true</NoDefaultExcludes>
+    <IsPackable>true</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="templates/**/*" Exclude="templates/**/bin/**;templates/**/obj/**;templates/**/node_modules/**" />
+    <Compile Remove="**/*" />
+  </ItemGroup>
+
+</Project>
